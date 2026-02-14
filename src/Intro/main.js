@@ -5,9 +5,10 @@ import Main from "../Inicial/main";
 
 export default function App() {
   const [pagina, setPagina] = useState("login");
+  const [usuario, setUsuario] = useState("");
 
   if (pagina === "main") {
-    return <Main />;
+    return <Main nomeLogado={usuario} />;
   }
 
   return (
@@ -18,7 +19,11 @@ export default function App() {
       <h2>Faça seu login</h2>
 
       <div>
-        <input type="email" placeholder="E-mail ou Nome" />
+        <input
+          type="email"
+          placeholder="E-mail ou Nome"
+          onChange={(e) => setUsuario(e.target.value)}
+        />
         <input type="password" placeholder="Senha" />
       </div>
       <button onClick={() => setPagina("main")}>Entrar</button>

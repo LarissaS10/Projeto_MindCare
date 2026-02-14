@@ -7,11 +7,11 @@ import Especialistas from "../Especialistas/main";
 import Header from "../Header/main";
 import { getEspecialistas } from "../Services/APIs";
 
-export default function Main() {
+export default function Main({ nomeLogado }) {
   const [pagina, setPagina] = useState("main");
   const [especialistasAPI, setEspecialistasAPI] = useState([]);
 
-  const nomeLogado = "Paciente 1";
+  const nomeUsuario = nomeLogado || "Paciente";
 
   useEffect(() => {
     const carregarDados = async () => {
@@ -42,7 +42,7 @@ export default function Main() {
       <Header setPagina={setPagina} nome={nomeLogado} />
 
       <div className="banner">
-        <h1>Ola, {nomeLogado}!</h1>
+        <h1>Ola, {nomeUsuario}!</h1>
         <h2>Como podemos ajudar?</h2>
       </div>
 
