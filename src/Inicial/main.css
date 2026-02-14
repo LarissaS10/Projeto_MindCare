@@ -126,3 +126,17 @@
 .especialistas {
   background: linear-gradient(180deg, #ee5ee7, #9c349c);
 }
+
+@media (min-width: 37.5rem) {
+  .banner h1 {
+    font-size: 2.25rem;
+  }
+
+  .banner h2 {
+    font-size: 1.1rem;
+  }
+
+  .opcoes {
+    gap: 1.25rem;
+  }
+}

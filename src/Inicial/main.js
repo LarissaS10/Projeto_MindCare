@@ -11,7 +11,7 @@ export default function Main() {
   const [pagina, setPagina] = useState("main");
   const [especialistasAPI, setEspecialistasAPI] = useState([]);
 
-  const nomeLogado = "Paciente";
+  const nomeLogado = "Paciente 1";
 
   useEffect(() => {
     const carregarDados = async () => {
