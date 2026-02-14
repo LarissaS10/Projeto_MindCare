@@ -1,0 +1,114 @@
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
+  border-radius: 1.25rem;
+}
+
+.logo {
+  height: 3rem;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+}
+
+.menu-toggle img {
+  height: 1.5rem;
+}
+
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 0.0625rem solid #eee;
+  border-radius: 0 0 1.25rem 1.25rem;
+  overflow: hidden;
+}
+
+.nav-menu.active {
+  display: block;
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-menu li {
+  border-bottom: 0.0625rem solid #eee;
+}
+
+.nav-menu a {
+  display: block;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  color: #1f1f1f;
+  font-weight: 500;
+}
+
+.nav-link-historico:hover {
+  color: #26c6da !important;
+}
+
+.nav-link-agendamento:hover {
+  color: #2674da !important;
+}
+
+.nav-link-chat:hover {
+  color: #9e5ee7 !important;
+}
+
+.nav-link-especialistas:hover {
+  color: #9c349c !important;
+}
+
+.nav-menu a:hover {
+  transform: translateY(-0.125rem);
+}
+
+@media (min-width: 48rem) {
+  .main-header {
+    padding: 1rem 2rem;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-menu {
+    display: block;
+    position: static;
+    width: auto;
+    border: none;
+  }
+
+  .nav-menu ul {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .nav-menu li {
+    border-bottom: none;
+  }
+
+  .nav-menu a {
+    padding: 0.5rem 0.5rem;
+    display: inline-block;
+  }
+}
