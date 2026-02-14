@@ -140,3 +140,60 @@
     gap: 1.25rem;
   }
 }
+
+@media (min-width: 48rem) {
+  .Menu,
+  .Main {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    gap: 2.5rem;
+  }
+
+  .banner {
+    margin-bottom: 1rem;
+  }
+
+  .banner h1 {
+    font-size: 3rem;
+  }
+
+  .opcoes {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .opcoes button {
+    flex: 1;
+    max-width: 16rem;
+    height: 11rem;
+    font-size: 1rem;
+    padding: 1.5rem;
+
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      box-shadow 0.3s ease;
+  }
+
+  .opcoes button:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.12);
+  }
+
+  .feed {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .feed > div {
+    padding: 2rem;
+    transition: background 0.3s ease;
+  }
+
+  .feed > div:hover {
+    background: #ffffff;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.05);
+  }
+}
