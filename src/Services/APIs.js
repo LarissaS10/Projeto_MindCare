@@ -10,3 +10,4 @@ export const getDadosIniciais = async () => {
     return null;
   }
 };
+//consumo do json

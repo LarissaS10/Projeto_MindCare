@@ -8,17 +8,17 @@
       {
         "id": 1,
         "especialista": "Larissa",
-        "texto": "Beber água ajuda mais com a memória do que você imagina!"
+        "texto": "Beber água ajuda mais com a memória do que você imagina! "
       },
       {
         "id": 2,
         "especialista": "Sofia",
-        "texto": "Conselho Semanal: Leia pelo menos duas páginas de um livro."
+        "texto": "Conselho Semanal: Leia pelo menos duas páginas de um livro. "
       },
       {
         "id": 3,
         "especialista": "Tiago",
-        "texto": "Caminhar por 30 min no parque tem benefícios para o corpo e mente"
+        "texto": "Caminhar por 30 min no parque tem benefícios para o corpo e mente "
       }
     ]
   }
