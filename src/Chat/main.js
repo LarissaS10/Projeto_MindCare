@@ -10,7 +10,7 @@ export default function Chat({ onVoltar }) {
 
       <div className="chatMessages">
         <div className="message bot">
-          <p>Olá, Franco! Como você está se sentindo hoje?</p>
+          <p>Olá, Sofia! Como você está se sentindo hoje?</p>
         </div>
 
         <div className="message user">
