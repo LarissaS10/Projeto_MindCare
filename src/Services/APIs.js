@@ -10,4 +10,4 @@ export const getDadosIniciais = async () => {
     return null;
   }
 };
-//consumo do json para correção do tp anterior
+//consumo do json para correção do tp anterior (commit da sofia está dando bug)
