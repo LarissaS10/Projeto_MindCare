@@ -1,13 +1,12 @@
-export const getEspecialistas = async () => {
+export const getDadosIniciais = async () => {
   try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users"); //essa é nossa API (Endpoint pros amigos)
-    if (!response.ok) throw new Error("Erro na requisição"); //aqui começa a verificação da requisição (promises acho...)
+    const response = await fetch("/Dados.json");
 
-    const dadosNomes = await response.json(); //coloquei async
+    if (!response.ok) throw new Error("Não foi possível carregar o arquivo.");
 
-    return dadosNomes.slice(0, 3); // só retorna os 3 primeiros nomes
+    return await response.json();
   } catch (error) {
-    console.error("Erro ao buscar especialistas:", error); // aqui o catch
-    return [];
+    console.error("Erro ao buscar dados:", error);
+    return null;
   }
 };
