@@ -7,7 +7,7 @@ import Especialistas from "../Especialistas/main";
 import Header from "../Header/main";
 import { getDadosIniciais } from "../Services/APIs";
 
-export default function Main() {
+export default function Main({ nomeLogado }) {
   const [pagina, setPagina] = useState("main");
   const [usuario, setUsuario] = useState(null);
   const [feedConselhos, setFeedConselhos] = useState([]);
@@ -17,12 +17,17 @@ export default function Main() {
       const dados = await getDadosIniciais();
 
       if (dados) {
-        setUsuario(dados.usuarioLogado);
+        const infoUsuario = {
+          ...dados.usuarioLogado,
+          nome: nomeLogado || dados.usuarioLogado.nome,
+        };
+
+        setUsuario(infoUsuario);
         setFeedConselhos(dados.feedConselhos);
       }
     };
     carregarDadosDoProjeto();
-  }, []);
+  }, [nomeLogado]);
 
   if (pagina === "Agendamento")
     return <Agendamento onVoltar={() => setPagina("main")} />;
@@ -36,7 +41,7 @@ export default function Main() {
     return (
       <div style={{ padding: "20px", textAlign: "center" }}>
         <h2>Carregando plataforma MindCare...</h2>
-        <p>Aguardando conexão com Services/Dados.json</p>
+        <p>Aguardando conexão com o banco de dados.</p>
       </div>
     );
   }
@@ -47,7 +52,7 @@ export default function Main() {
 
       <div className="banner">
         <h1>Ola, {usuario.nome}!</h1>
-        <h2>Como podemos ajudar?</h2>
+        <h2>Como podemos ajudar hoje?</h2>
       </div>
 
       <div className="opcoes">

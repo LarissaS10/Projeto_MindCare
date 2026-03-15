@@ -1,25 +1,31 @@
 {
-    "usuarioLogado": {
+  "usuariosCadastrados": [
+    {
       "nome": "Franco",
-      "status": "online"
+      "senha": "123",
+      "tipo": "terapeuta"
     },
-    
-    "feedConselhos": [
-      {
-        "id": 1,
-        "especialista": "Larissa",
-        "texto": "Beber água ajuda mais com a memória do que você imagina! "
-      },
-      {
-        "id": 2,
-        "especialista": "Sofia",
-        "texto": "Conselho Semanal: Leia pelo menos duas páginas de um livro. "
-      },
-      {
-        "id": 3,
-        "especialista": "Tiago",
-        "texto": "Caminhar por 30 min no parque tem benefícios para o corpo e mente "
-      }
-    ]
-  }
-  
+    {
+      "nome": "Sofia",
+      "senha": "456",
+      "tipo": "paciente"
+    },
+    {
+      "nome": "Larissa",
+      "senha": "789",
+      "tipo": "paciente"
+    }
+  ],
+  "feedConselhos": [
+    {
+      "id": 1,
+      "especialista": "Larissa",
+      "texto": "Beber água ajuda mais com a memória do que você imagina!"
+    },
+    {
+      "id": 2,
+      "especialista": "Sofia",
+      "texto": "Conselho Semanal: Leia pelo menos duas páginas de um livro."
+    }
+  ]
+}
