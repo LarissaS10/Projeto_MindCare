@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
 import Intro from "./Intro/main";
 
@@ -8,6 +9,8 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
-    <Intro />
+    <BrowserRouter>
+      <Intro />
+    </BrowserRouter>
   </StrictMode>
 );

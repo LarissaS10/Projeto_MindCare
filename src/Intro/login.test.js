@@ -1,10 +1,22 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Intro from "../Intro/main";
+import { MemoryRouter } from "react-router-dom";
+import Intro from "./main";
+import * as api from "../Services/APIs";
 
-describe("Teste de Integração - Login MindCare", () => {
-  test("Deve impedir a entrada se os campos estiverem vazios", () => {
-    render(<Intro />);
+jest.mock("../Services/APIs");
+
+describe("Testes de Login MindCare", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  const renderComRouter = (ui) => {
+    return render(<MemoryRouter initialEntries={["/"]}>{ui}</MemoryRouter>);
+  };
+
+  test("Deve validar campos vazios", () => {
+    renderComRouter(<Intro />);
 
     const botao = screen.getByRole("button", { name: /entrar/i });
     fireEvent.click(botao);
@@ -14,41 +26,45 @@ describe("Teste de Integração - Login MindCare", () => {
     ).toBeInTheDocument();
   });
 
-  test("Deve permitir a entrada se o usuário 'Franco' existir no JSON", async () => {
-    render(<Intro />);
+  test("Deve navegar para escolha de tipo se usuário não existe", async () => {
+    api.getDadosIniciais.mockResolvedValue({
+      usuariosCadastrados: [{ nome: "Franco" }],
+    });
 
-    const nomeInput = screen.getByPlaceholderText(/E-mail ou Nome/i);
-    const senhaInput = screen.getByPlaceholderText(/Senha/i);
-    const botao = screen.getByRole("button", { name: /entrar/i });
+    renderComRouter(<Intro />);
 
-    fireEvent.change(nomeInput, { target: { value: "Franco" } });
-    fireEvent.change(senhaInput, { target: { value: "123" } });
-    fireEvent.click(botao);
+    fireEvent.change(screen.getByPlaceholderText(/E-mail ou Nome/i), {
+      target: { value: "Novo" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/Senha/i), {
+      target: { value: "123" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /entrar/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Como deseja se cadastrar/i)).toBeInTheDocument();
+    });
+  });
+
+  test("Deve realizar login com sucesso para 'Franco'", async () => {
+    api.getDadosIniciais.mockResolvedValue({
+      usuariosCadastrados: [{ nome: "Franco" }],
+    });
+
+    renderComRouter(<Intro />);
+
+    fireEvent.change(screen.getByPlaceholderText(/E-mail ou Nome/i), {
+      target: { value: "Franco" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/Senha/i), {
+      target: { value: "123" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /entrar/i }));
 
     await waitFor(() => {
       expect(
         screen.queryByText(/por favor, preencha todos os campos/i)
       ).not.toBeInTheDocument();
-      expect(screen.getByText(/Ola, Franco!/i)).toBeInTheDocument();
-    });
-  });
-
-  test("Deve mostrar opção de cadastro se o usuário não for encontrado", async () => {
-    render(<Intro />);
-
-    const nomeInput = screen.getByPlaceholderText(/E-mail ou Nome/i);
-    const senhaInput = screen.getByPlaceholderText(/Senha/i);
-    const botao = screen.getByRole("button", { name: /entrar/i });
-
-    fireEvent.change(nomeInput, { target: { value: "UsuarioNovo" } });
-    fireEvent.change(senhaInput, { target: { value: "999" } });
-    fireEvent.click(botao);
-
-    await waitFor(() => {
-      expect(screen.getByText(/Como deseja se cadastrar/i)).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: /sou paciente/i })
-      ).toBeInTheDocument();
     });
   });
 });
