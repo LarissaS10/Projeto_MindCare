@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./main.css";
 
-export default function Agendamento({ onVoltar }) {
+export default function Agendamento() {
+  const navigate = useNavigate();
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [profissional, setProfissional] = useState("");
@@ -15,7 +18,7 @@ export default function Agendamento({ onVoltar }) {
     }
 
     setErro("");
-    onVoltar();
+    navigate("/main");
   };
 
   return (

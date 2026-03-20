@@ -1,6 +1,9 @@
 import "./main.css";
+import { useNavigate } from "react-router-dom";
 
-export default function Chat({ onVoltar }) {
+export default function Chat() {
+  const navigate = useNavigate();
+
   return (
     <div className="chatPage">
       <header className="chatHeader">
@@ -16,21 +19,6 @@ export default function Chat({ onVoltar }) {
         <div className="message user">
           <p>Oi! Estou me sentindo um pouco cansado.</p>
         </div>
-
-        <div className="message bot">
-          <p>Entendo. Você conseguiu descansar bem essa semana?</p>
-        </div>
-
-        <div className="message user">
-          <p>Nem tanto, tive muitos compromissos.</p>
-        </div>
-
-        <div className="message bot">
-          <p>
-            Obrigado por compartilhar. Lembre-se de reservar um tempo para você
-            e marcar a consulta da semana.
-          </p>
-        </div>
       </div>
 
       <div className="chatFooter">
@@ -38,7 +26,7 @@ export default function Chat({ onVoltar }) {
         <button disabled>Enviar</button>
       </div>
 
-      <button className="btnVoltar" onClick={onVoltar}>
+      <button className="btnVoltar" onClick={() => navigate("/main")}>
         Voltar
       </button>
     </div>

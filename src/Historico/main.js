@@ -1,13 +1,8 @@
-import { useState } from "react";
 import "./main.css";
-import Main from "../Inicial/main";
+import { useNavigate } from "react-router-dom";
 
-export default function Historico({ onVoltar }) {
-  const [pagina, setPagina] = useState("historico");
-
-  if (pagina === "main") {
-    return <Main />;
-  }
+export default function Historico() {
+  const navigate = useNavigate();
 
   return (
     <div className="historicoPage">
@@ -20,23 +15,15 @@ export default function Historico({ onVoltar }) {
         <div className="historicoCard">
           <h3>Hoje</h3>
           <p>Humor: 😊 Bem</p>
-          <small>Nota: “Dia tranquilo, consegui me organizar.”</small>
         </div>
 
         <div className="historicoCard">
           <h3>Ontem</h3>
           <p>Humor: 😐 Neutro</p>
-          <small>Nota: “Fiquei cansado, mas deu tudo certo.”</small>
-        </div>
-
-        <div className="historicoCard">
-          <h3>Semana passada</h3>
-          <p>Humor: 😟 Ansioso</p>
-          <small>Nota: “Muitas tarefas. Preciso descansar mais.”</small>
         </div>
       </div>
 
-      <button type="button" className="btnVoltar" onClick={onVoltar}>
+      <button className="btnVoltar" onClick={() => navigate("/main")}>
         Voltar
       </button>
     </div>
