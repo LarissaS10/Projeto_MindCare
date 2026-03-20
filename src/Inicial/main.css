@@ -34,7 +34,7 @@
   padding: 0.5rem 0.2rem 1.25rem 0.2rem;
 }
 
-.opcoes button {
+.opcoes a {
   flex: 1 1 calc(50% - 0.5rem);
   height: 8rem;
   min-width: 8rem;
@@ -82,7 +82,7 @@
     font-size: 2rem;
   }
 
-  .opcoes button {
+  .opcoes a {
     flex: 0 0 9rem;
     height: 11rem;
     font-size: 1rem;
@@ -101,7 +101,7 @@
     justify-content: space-between;
   }
 
-  .opcoes button {
+  .opcoes a {
     flex: 1;
     max-width: 14rem;
     height: 10rem;
@@ -164,7 +164,7 @@
     gap: 1.5rem;
   }
 
-  .opcoes button {
+  .opcoes a {
     flex: 1;
     max-width: 16rem;
     height: 11rem;
@@ -175,7 +175,7 @@
       box-shadow 0.3s ease;
   }
 
-  .opcoes button:hover {
+  .opcoes a:hover {
     transform: translateY(-8px);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.12);
   }

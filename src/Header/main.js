@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./main.css";
 import IconeMindfulness from "../media/mindfulness_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg";
 import menuBurguer from "../media/menu_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24 (2).svg";
 
-const Header = () => {
+const Header = ({ nome }) => {
   const [menuAberto, setMenuAberto] = useState(false);
 
   const toggleMenu = () => {
@@ -14,6 +15,7 @@ const Header = () => {
     <header className="main-header">
       <div className="logo-container">
         <img src={IconeMindfulness} alt="Mindfulness Logo" className="logo" />
+        <span className="user-name">Olá, {nome}</span>
       </div>
 
       <button className="menu-toggle" onClick={toggleMenu}>
@@ -23,49 +25,49 @@ const Header = () => {
       <nav className={`nav-menu ${menuAberto ? "active" : ""}`}>
         <ul>
           <li>
-            <a
-              href="#historico"
+            <NavLink
+              to="/main/historico"
               className="nav-link-historico"
               onClick={() => setMenuAberto(false)}
             >
               Histórico
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="#agendamento"
+            <NavLink
+              to="/main/agendamento"
               className="nav-link-agendamento"
               onClick={() => setMenuAberto(false)}
             >
               Agendamento
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="#chat"
+            <NavLink
+              to="/main/chat"
               className="nav-link-chat"
               onClick={() => setMenuAberto(false)}
             >
               Chat
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="#especialistas"
+            <NavLink
+              to="/main/especialistas"
               className="nav-link-especialistas"
               onClick={() => setMenuAberto(false)}
             >
               Especialistas
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="#logout"
+            <NavLink
+              to="/"
               className="nav-link-logout"
               onClick={() => setMenuAberto(false)}
             >
               Sair
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

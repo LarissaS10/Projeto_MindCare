@@ -1,41 +1,32 @@
 import "./main.css";
 import { useState, useEffect } from "react";
-import Agendamento from "../Agendamento/main";
-import Historico from "../Historico/main";
-import Chat from "../Chat/main";
-import Especialistas from "../Especialistas/main";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import Header from "../Header/main";
 import { getDadosIniciais } from "../Services/APIs";
 
-export default function Main({ nomeLogado }) {
-  const [pagina, setPagina] = useState("main");
+export default function Main() {
   const [usuario, setUsuario] = useState(null);
   const [feedConselhos, setFeedConselhos] = useState([]);
+  const location = useLocation();
+
+  const nomeLogado =
+    location.state?.nomeLogado || localStorage.getItem("nomeLogado");
 
   useEffect(() => {
     const carregarDadosDoProjeto = async () => {
       const dados = await getDadosIniciais();
-
       if (dados) {
+        const usuarioBase = dados.usuarioLogado || {};
         const infoUsuario = {
-          ...dados.usuarioLogado,
-          nome: nomeLogado || dados.usuarioLogado.nome,
+          ...usuarioBase,
+          nome: nomeLogado || usuarioBase.nome || "Usuário",
         };
-
         setUsuario(infoUsuario);
-        setFeedConselhos(dados.feedConselhos);
+        setFeedConselhos(dados.feedConselhos || []);
       }
     };
     carregarDadosDoProjeto();
   }, [nomeLogado]);
-
-  if (pagina === "Agendamento")
-    return <Agendamento onVoltar={() => setPagina("main")} />;
-  if (pagina === "Historico")
-    return <Historico onVoltar={() => setPagina("main")} />;
-  if (pagina === "Chat") return <Chat onVoltar={() => setPagina("main")} />;
-  if (pagina === "Especialistas")
-    return <Especialistas onVoltar={() => setPagina("main")} />;
 
   if (!usuario) {
     return (
@@ -48,45 +39,47 @@ export default function Main({ nomeLogado }) {
 
   return (
     <div className="Menu">
-      <Header setPagina={setPagina} nome={usuario.nome} />
+      <Header nome={usuario.nome} />
 
-      <div className="banner">
-        <h1>Ola, {usuario.nome}!</h1>
-        <h2>Como podemos ajudar hoje?</h2>
-      </div>
+      {/* MENU SÓ NO /main */}
+      {location.pathname === "/main" && (
+        <div className="opcoes">
+          <NavLink to="historico" className="historico">
+            Histórico
+          </NavLink>
+          <NavLink to="agendamento" className="agendamento">
+            Agendamento
+          </NavLink>
+          <NavLink to="chat" className="chat">
+            Chat
+          </NavLink>
+          <NavLink to="especialistas" className="especialistas">
+            Especialistas
+          </NavLink>
+        </div>
+      )}
 
-      <div className="opcoes">
-        <button onClick={() => setPagina("Historico")} className="historico">
-          Histórico
-        </button>
-        <button
-          onClick={() => setPagina("Agendamento")}
-          className="agendamentos"
-        >
-          Agendamento
-        </button>
-        <button onClick={() => setPagina("Chat")} className="chat">
-          Chat
-        </button>
-        <button
-          onClick={() => setPagina("Especialistas")}
-          className="especialistas"
-        >
-          Especialistas
-        </button>
-      </div>
+      <Outlet />
 
-      <br />
-      <h2>Conselhos dos Especialistas</h2>
-
-      <div className="feed">
-        {feedConselhos.map((item) => (
-          <div key={item.id} className="feed-item">
-            <h3>{item.especialista} diz:</h3>
-            <p>{item.texto}</p>
+      {/* Conteúdo inicial */}
+      {location.pathname === "/main" && (
+        <>
+          <div className="banner">
+            <h1>Olá, {usuario.nome}!</h1>
+            <h2>Como podemos ajudar hoje?</h2>
           </div>
-        ))}
-      </div>
+
+          <h2>Conselhos dos Especialistas</h2>
+          <div className="feed">
+            {feedConselhos.map((item) => (
+              <div key={item.id} className="feed-item">
+                <h3>{item.especialista} diz:</h3>
+                <p>{item.texto}</p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
