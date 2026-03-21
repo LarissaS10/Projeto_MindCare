@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./main.css";
 
-export default function Agendamento() {
+export default function Agendamento({ onVoltar }) {
   const navigate = useNavigate();
 
   const [nome, setNome] = useState("");
@@ -11,14 +11,21 @@ export default function Agendamento() {
   const [descricao, setDescricao] = useState("");
   const [erro, setErro] = useState("");
 
+  const formularioValido = nome && email && profissional && descricao;
+
   const handleSubmit = () => {
-    if (!nome || !email || !profissional || !descricao) {
+    if (!formularioValido) {
       setErro("Por favor, preencha todos os campos.");
       return;
     }
 
     setErro("");
-    navigate("/main");
+
+    if (onVoltar) {
+      onVoltar(); // usado nos testes
+    } else {
+      navigate("/main"); // usado na aplicação real
+    }
   };
 
   return (
@@ -68,6 +75,13 @@ export default function Agendamento() {
           onClick={handleSubmit}
         >
           Marcar Consulta
+        </button>
+        <button
+          type="button"
+          className="sched-btn-voltar"
+          onClick={() => navigate("/main")}
+        >
+          Voltar
         </button>
       </form>
     </div>

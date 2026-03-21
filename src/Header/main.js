@@ -15,7 +15,6 @@ const Header = ({ nome }) => {
     <header className="main-header">
       <div className="logo-container">
         <img src={IconeMindfulness} alt="Mindfulness Logo" className="logo" />
-        <span className="user-name">Olá, {nome}</span>
       </div>
 
       <button className="menu-toggle" onClick={toggleMenu}>
