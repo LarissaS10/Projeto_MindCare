@@ -1,39 +1,44 @@
 // testes Larissa
 
 import { render, screen, fireEvent } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import Agendamento from "./main";
 
 // teste de renderização (verifica se a tela e elementos aparecem)
-test("renderiza a tela de agendamento com os campos do formulário", () => {
-  render(<Agendamento onVoltar={() => {}} />);
+test("renderiza a tela de agendamento", () => {
+  render(
+    <MemoryRouter>
+      <Agendamento />
+    </MemoryRouter>
+  );
 
   expect(screen.getByText("Agendamento de Consulta")).toBeInTheDocument();
-  expect(screen.getByPlaceholderText("Nome Completo")).toBeInTheDocument();
-  expect(screen.getByPlaceholderText("E-mail")).toBeInTheDocument();
-  expect(screen.getByRole("combobox")).toBeInTheDocument();
-  expect(
-    screen.getByPlaceholderText("Descreva suas questões")
-  ).toBeInTheDocument();
 });
 
 // teste de interação (simula ação do usuário com clique no botão)
-test("chama onVoltar ao clicar em Marcar Consulta", () => {
-  const mockOnVoltar = jest.fn();
+test("mostra erro ao clicar sem preencher", () => {
+  render(
+    <MemoryRouter>
+      <Agendamento />
+    </MemoryRouter>
+  );
 
-  render(<Agendamento onVoltar={mockOnVoltar} />);
+  fireEvent.click(screen.getByText("Marcar Consulta"));
 
-  const botao = screen.getByRole("button", { name: /marcar consulta/i });
-
-  fireEvent.click(botao);
-
-  expect(mockOnVoltar).toHaveBeenCalledTimes(1);
+  expect(
+    screen.getByText("Por favor, preencha todos os campos.")
+  ).toBeInTheDocument();
 });
 
 // teste de estado inicial (verifica como a tela inicia)
-test("botão começa desabilitado", () => {
-  render(<Agendamento onVoltar={() => {}} />);
+test("campos começam vazios", () => {
+  render(
+    <MemoryRouter>
+      <Agendamento />
+    </MemoryRouter>
+  );
 
-  const botao = screen.getByRole("button", { name: /marcar consulta/i });
-
-  expect(botao).toBeDisabled();
+  expect(screen.getByPlaceholderText("Nome Completo").value).toBe("");
+  expect(screen.getByPlaceholderText("E-mail").value).toBe("");
+  expect(screen.getByPlaceholderText("Descreva suas questões").value).toBe("");
 });
