@@ -29,12 +29,11 @@ export default function Agendamento({ onVoltar }) {
   };
 
   return (
-    <div className="sched-container">
-      <h1 className="sched-title">Agendamento de Consulta</h1>
+    <div>
+      <h1>Agendamento de Consulta</h1>
 
-      <form className="sched-form">
+      <form>
         <input
-          className="sched-input"
           type="text"
           placeholder="Nome Completo"
           value={nome}
@@ -42,7 +41,6 @@ export default function Agendamento({ onVoltar }) {
         />
 
         <input
-          className="sched-input"
           type="email"
           placeholder="E-mail"
           value={email}
@@ -50,7 +48,6 @@ export default function Agendamento({ onVoltar }) {
         />
 
         <select
-          className="sched-select"
           value={profissional}
           onChange={(e) => setProfissional(e.target.value)}
         >
@@ -61,7 +58,6 @@ export default function Agendamento({ onVoltar }) {
         </select>
 
         <textarea
-          className="sched-textarea"
           placeholder="Descreva suas questões"
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
@@ -69,18 +65,10 @@ export default function Agendamento({ onVoltar }) {
 
         {erro && <p className="erro-msg">{erro}</p>}
 
-        <button
-          type="button"
-          className="sched-btn-submit"
-          onClick={handleSubmit}
-        >
+        <button type="button" onClick={handleSubmit}>
           Marcar Consulta
         </button>
-        <button
-          type="button"
-          className="sched-btn-voltar"
-          onClick={() => navigate("/main")}
-        >
+        <button type="button" onClick={() => navigate("/main")}>
           Voltar
         </button>
       </form>
