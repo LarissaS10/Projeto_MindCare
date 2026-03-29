@@ -82,7 +82,7 @@
   transform: translateY(-0.125rem);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .main-header {
     padding: 1rem 2rem;
   }
